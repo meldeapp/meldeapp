@@ -1,0 +1,362 @@
+---
+swagger: "2.0"
+info:
+  description: "Melder at denne er oppe å kjører om 20 år"
+  version: "0.0.1"
+  title: "Melde-app API"
+host: "localhost:8090"
+basePath: "/v1"
+schemes:
+- "http"
+produces:
+- "application/json"
+paths:
+  /announcements:
+    get:
+      tags:
+      - "Announcement"
+      summary: "Announcements"
+      description: "The announcement endpoint retrieves a list of matching announcements\
+        \ for the query.\n"
+      operationId: "announcementsGET"
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "Id of the announcement"
+        required: false
+        type: "number"
+        format: "uuid"
+      responses:
+        200:
+          description: "An array of products"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Announcement"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Announcement"
+    post:
+      tags:
+      - "Announcement"
+      summary: "Save a new announcement"
+      description: "Saves a new announcement to the database.\n"
+      operationId: "announcementsPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Announcement"
+      responses:
+        201:
+          description: "An array of products"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Announcement"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Announcement"
+  /history:
+    get:
+      tags:
+      - "User"
+      summary: "User Activity"
+      description: "The User Activity endpoint returns data about a user's lifetime\
+        \ activity with Meldeapp"
+      operationId: "historyGET"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "Offset the list of returned results by this amount. Default\
+          \ is zero."
+        required: false
+        type: "integer"
+        format: "int32"
+      - name: "limit"
+        in: "query"
+        description: "Number of items to retrieve. Default is 5, maximum is 100."
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "History information for the given user"
+          schema:
+            $ref: "#/definitions/Announcement"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /me:
+    get:
+      tags:
+      - "User"
+      summary: "User Profile"
+      description: "The User Profile endpoint returns information about the user that\
+        \ has authorized with the application."
+      operationId: "meGET"
+      parameters: []
+      responses:
+        200:
+          description: "Profile information for a user"
+          schema:
+            $ref: "#/definitions/Profile"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    put:
+      tags:
+      - "User"
+      operationId: "mePUT"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Profile"
+      responses:
+        200:
+          description: "Profile information for a user"
+          schema:
+            $ref: "#/definitions/Profile"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /stats:
+    get:
+      tags:
+      - "Stats"
+      summary: "Stats"
+      description: "Some stats"
+      operationId: "statsGET"
+      parameters: []
+      responses:
+        200:
+          description: "Stats"
+          schema:
+            $ref: "#/definitions/Stats"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Stats"
+  /users:
+    get:
+      tags:
+      - "User"
+      summary: "Users"
+      description: "Retrieves users"
+      operationId: "usersGET"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "Offset the list of returned results by this amount. Default\
+          \ is zero."
+        required: false
+        type: "integer"
+        format: "int32"
+      - name: "limit"
+        in: "query"
+        description: "Number of items to retrieve. Default is 5, maximum is 100."
+        required: false
+        type: "integer"
+        format: "int32"
+      - name: "name"
+        in: "query"
+        description: "Query user by name"
+        required: false
+        type: "string"
+      - name: "uuid"
+        in: "query"
+        description: "UUID"
+        required: false
+        type: "string"
+        format: "uuid"
+      responses:
+        200:
+          description: "History information for the given user"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Profile"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    post:
+      tags:
+      - "User"
+      operationId: "usersPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Profile"
+      responses:
+        201:
+          description: "The new user"
+          schema:
+            $ref: "#/definitions/Profile"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /users/:uuid:
+    get:
+      tags:
+      - "User"
+      summary: "Users"
+      description: "Retrieves user"
+      operationId: "usersuuidGET"
+      parameters: []
+      responses:
+        200:
+          description: "A user."
+          schema:
+            $ref: "#/definitions/Profile"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+definitions:
+  Profile:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "Name of the user."
+      email:
+        type: "string"
+        description: "Email address of the user"
+      picture:
+        type: "string"
+        description: "Image URL of the user."
+      friends:
+        type: "array"
+        items:
+          type: "string"
+          format: "uuid"
+          description: "List of id's to fiends"
+      created:
+        type: "string"
+        format: "date-time"
+        description: "Timestamp when the user was created."
+      upated:
+        type: "string"
+        format: "date-time"
+        description: "Timestamp when the user was last updated."
+  Announcement:
+    type: "object"
+    properties:
+      announcement_id:
+        type: "string"
+        description: "Unique identifier representing a single announcement."
+      announcement:
+        type: "string"
+        description: "The announcement itself."
+      headline:
+        type: "string"
+        description: "Headline."
+      author:
+        type: "string"
+        description: "UUID of the author."
+      vitnesses:
+        type: "array"
+        items:
+          $ref: "#/definitions/Vitness"
+      opponents:
+        type: "array"
+        items:
+          $ref: "#/definitions/Vitness"
+      tags:
+        type: "array"
+        items:
+          type: "string"
+      reward:
+        type: "string"
+        description: "Reward for the bet"
+      image:
+        type: "string"
+        description: "Image URL representing whatever."
+      visibility:
+        type: "string"
+        description: "Who should be able to se the announcement."
+      latitude:
+        type: "number"
+        description: "Latitude of the position where the announcement was made."
+      longditude:
+        type: "number"
+        description: "Longditude of the postion where the announcement was made."
+      location:
+        type: "string"
+        description: "Name of the location the announce was made."
+      winner:
+        $ref: "#/definitions/Profile"
+      completed:
+        type: "boolean"
+        description: "Wether the announcement is completed"
+      paid:
+        type: "boolean"
+        description: "Wether payment has been made to the winner"
+      created:
+        type: "string"
+        format: "date-time"
+        description: "Timestamp when the announcment was created."
+      upated:
+        type: "string"
+        format: "date-time"
+        description: "Timestamp when the announcment was last updated."
+  Vitness:
+    type: "object"
+    properties:
+      user:
+        $ref: "#/definitions/Profile"
+      signed:
+        type: "string"
+        description: "A confirmatin from the user."
+  Stats:
+    type: "object"
+    properties:
+      nrOfUsers:
+        type: "integer"
+        format: "int32"
+      nrOfAnnouncements:
+        type: "integer"
+        format: "int32"
+  Error:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"
+      fields:
+        type: "string"
