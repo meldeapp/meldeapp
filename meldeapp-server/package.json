@@ -20,6 +20,6 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "mocha test"
+    "test": "./node_modules/mocha/bin/mocha dummytest.js"
   }
 }
