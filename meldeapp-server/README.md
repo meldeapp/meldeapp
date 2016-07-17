@@ -7,10 +7,22 @@ This example uses the [expressjs](http://expressjs.com/) framework.  To see how 
 
 [README](https://github.com/swagger-api/swagger-codegen/blob/master/README.md)
 
+## Requirements
+
+# Install mongodb (brew install mongodb)
+mkdir -p /data/db
+chown <insert username> /data/db
+
+# Dependencies that has to be installed
+npm install mongoose
+npm install crypto
+npm install mongoose-types
+
 ### Running the server
 To run the server, follow these simple steps:
 
 ```
+mongod
 npm install
 node .
 ```
@@ -18,7 +30,10 @@ node .
 To view the Swagger UI interface:
 
 ```
-open http://localhost:8080/docs
+open http://localhost:8090/docs
 ```
+
+
+[![Build Status](https://travis-ci.org/sigurlu/meldeapp.svg?branch=master)](https://travis-ci.org/sigurlu/meldeapp)
 
 This project leverages the mega-awesome [swagger-tools](https://github.com/apigee-127/swagger-tools) middleware which does most all the work.

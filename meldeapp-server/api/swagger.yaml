@@ -102,16 +102,16 @@ paths:
     get:
       tags:
       - "User"
-      summary: "User Profile"
-      description: "The User Profile endpoint returns information about the user that\
+      summary: "User User"
+      description: "The User User endpoint returns information about the user that\
         \ has authorized with the application."
       operationId: "meGET"
       parameters: []
       responses:
         200:
-          description: "Profile information for a user"
+          description: "User information for a user"
           schema:
-            $ref: "#/definitions/Profile"
+            $ref: "#/definitions/User"
         default:
           description: "Unexpected error"
           schema:
@@ -130,12 +130,12 @@ paths:
         name: "body"
         required: true
         schema:
-          $ref: "#/definitions/Profile"
+          $ref: "#/definitions/User"
       responses:
         200:
-          description: "Profile information for a user"
+          description: "User information for a user"
           schema:
-            $ref: "#/definitions/Profile"
+            $ref: "#/definitions/User"
         default:
           description: "Unexpected error"
           schema:
@@ -197,7 +197,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Profile"
+              $ref: "#/definitions/User"
         default:
           description: "Unexpected error"
           schema:
@@ -216,12 +216,12 @@ paths:
         name: "body"
         required: true
         schema:
-          $ref: "#/definitions/Profile"
+          $ref: "#/definitions/SignUpRequest"
       responses:
         201:
           description: "The new user"
           schema:
-            $ref: "#/definitions/Profile"
+            $ref: "#/definitions/User"
         default:
           description: "Unexpected error"
           schema:
@@ -229,32 +229,46 @@ paths:
       x-swagger-router-controller: "User"
   /users/:uuid:
     get:
-      tags:
-      - "User"
-      summary: "Users"
-      description: "Retrieves user"
       operationId: "usersuuidGET"
-      parameters: []
+      produces:
+      - "application/json"
+      summary: Users
+      description: Retrieves user
+      tags:
+        - User
+      parameters:
+      - name: "uuid"
+        in: "query"
+        description: "UUID"
+        required: true
+        type: "string"
+        format: "uuid"
       responses:
         200:
           description: "A user."
           schema:
-            $ref: "#/definitions/Profile"
+            $ref: "#/definitions/User"
         default:
           description: "Unexpected error"
           schema:
             $ref: "#/definitions/Error"
       x-swagger-router-controller: "User"
 definitions:
-  Profile:
+  User:
     type: "object"
     properties:
+      uuid:
+        type: "string"
+        format: "uuid"
       name:
         type: "string"
         description: "Name of the user."
       email:
         type: "string"
         description: "Email address of the user"
+      password:
+        type: "string"
+        format: "password"
       picture:
         type: "string"
         description: "Image URL of the user."
@@ -264,14 +278,26 @@ definitions:
           type: "string"
           format: "uuid"
           description: "List of id's to fiends"
-      created:
+      createdAt:
         type: "string"
         format: "date-time"
         description: "Timestamp when the user was created."
-      upated:
+      upatedAt:
         type: "string"
         format: "date-time"
         description: "Timestamp when the user was last updated."
+  SignUpRequest:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "Name of the user."
+      email:
+        type: "string"
+        description: "Email address of the user"
+      password:
+        type: "string"
+        format: "password"
   Announcement:
     type: "object"
     properties:
@@ -318,7 +344,7 @@ definitions:
         type: "string"
         description: "Name of the location the announce was made."
       winner:
-        $ref: "#/definitions/Profile"
+        $ref: "#/definitions/User"
       completed:
         type: "boolean"
         description: "Wether the announcement is completed"
@@ -337,7 +363,7 @@ definitions:
     type: "object"
     properties:
       user:
-        $ref: "#/definitions/Profile"
+        $ref: "#/definitions/User"
       signed:
         type: "string"
         description: "A confirmatin from the user."
