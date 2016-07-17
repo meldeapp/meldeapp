@@ -199,3 +199,19 @@ exports.usersuuidGET = function(args, res, next) {
   });
 }
 
+exports.loginPOST = function(args, res, next) {
+  var email = args.body.value.email;
+  var password = args.body.value.password
+  User.authenticate(
+    email, password,
+    function (err, user) {
+      res.setHeader('Content-Type', 'application/json');
+      if ((user)&&(!err)) {
+        res.end(JSON.stringify(user))
+      } else {
+        res.statusCode = 401;
+        res.end(JSON.stringify({"code": 401, "message": err.toString()}))
+      }
+    });
+}
+

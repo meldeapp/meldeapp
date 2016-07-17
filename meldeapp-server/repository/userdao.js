@@ -64,7 +64,7 @@ UserSchema.statics.authenticate = function (email, password, fn) {
     if (!user) return fn(new Error('cannot find user'));
     if (user.password == hash(password, secret)) return fn(null, user);
     // Otherwise password is invalid
-    fn(new Error('invalid password'));
+    fn(new Error('invalid email/password'));
   });
 };
 

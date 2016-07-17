@@ -29,3 +29,7 @@ module.exports.usersPOST = function usersPOST (req, res, next) {
 module.exports.usersuuidGET = function usersuuidGET (req, res, next) {
   User.usersuuidGET(req.swagger.params, res, next);
 };
+
+module.exports.loginPOST = function loginPOST (req, res, next) {
+  User.loginPOST(req.swagger.params, res, next);
+};
