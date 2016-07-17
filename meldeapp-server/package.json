@@ -15,13 +15,11 @@
     "mongoose": "*",
     "mongoose-types": "*",
     "uuid": "*",
+    "mocha": "*",
     "chai": "*"
-  },
-    "devDependencies": {
-      "mocha": "*"
   },
   "scripts": {
     "start": "node index.js",
-    "test": "./node_modules/mocha/bin/mocha test/dummytest.js"
+    "test": "mocha test"
   }
 }
