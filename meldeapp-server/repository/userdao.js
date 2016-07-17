@@ -7,7 +7,7 @@ var mongoose = require('mongoose')
 var uuid = require('uuid');
 
 mongoTypes.loadTypes(mongoose, 'email');
-mongoose.connect('mongodb://localhost:27017/test');
+mongoose.connect('mongodb://db:27017/test');
 
 var secret = 'asdfghjkl'
 
