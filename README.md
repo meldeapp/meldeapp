@@ -1,3 +1,6 @@
+## Build status
+[![Build Status](https://travis-ci.org/meldeapp/meldeapp-server.svg?branch=master)](https://travis-ci.org/meldeapp/meldeapp-server)
+
 # Swagger generated server
 
 ## Overview
@@ -32,8 +35,5 @@ To view the Swagger UI interface:
 ```
 open http://localhost:8090/docs
 ```
-
-
-[![Build Status](https://travis-ci.org/meldeapp/meldeapp-server.svg?branch=master)](https://travis-ci.org/meldeapp/meldeapp-server)
 
 This project leverages the mega-awesome [swagger-tools](https://github.com/apigee-127/swagger-tools) middleware which does most all the work.
