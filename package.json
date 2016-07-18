@@ -2,7 +2,7 @@
   "name": "melde-app-api",
   "version": "0.0.1",
   "description": "Melder at denne er oppe å kjører om 20 år",
-  "main": "index.js",
+  "main": "app.js",
   "keywords": [
     "swagger"
   ],
@@ -19,7 +19,7 @@
     "chai": "*"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node app.js",
     "test": "./node_modules/mocha/bin/mocha test/test.js"
   }
 }
