@@ -34,6 +34,6 @@ open http://localhost:8090/docs
 ```
 
 
-[![Build Status](https://travis-ci.org/sigurlu/meldeapp.svg?branch=master)](https://travis-ci.org/sigurlu/meldeapp)
+[![Build Status](https://travis-ci.org/meldeapp/meldeapp-server.svg?branch=master)](https://travis-ci.org/meldeapp/meldeapp-server)
 
 This project leverages the mega-awesome [swagger-tools](https://github.com/apigee-127/swagger-tools) middleware which does most all the work.
