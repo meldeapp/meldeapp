@@ -5,7 +5,7 @@ db:
   ports:
     - 27017
 web:
-  build: ./meldeapp-server
+  build: .
   ports:
     - 3000:8090
   links:

@@ -14,9 +14,12 @@
     "swagger-tools": "0.10.1",
     "mongoose": "*",
     "mongoose-types": "*",
-    "uuid": "*"
+    "uuid": "*",
+    "mocha": "*",
+    "chai": "*"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "./node_modules/mocha/bin/mocha test/test.js"
   }
 }
